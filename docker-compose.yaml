@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: mysql
+    container_name: mysql_api
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: users
+      MYSQL_USER: user
+      MYSQL_PASSWORD: example
+    ports:
+      - 3307:3306
+      #ローカルPCからはポート3307で接続できる
+    volumes:
+      #初期データ
+      - ./sql:/docker-entrypoint-initdb.d
+      # ローカルのmy.cnfをマウント
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+
+volumes:
+  mysql-volume:
