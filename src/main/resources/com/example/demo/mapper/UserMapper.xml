@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.UserMapper">
+
+	<select id="searchByNameBirthdate" resultMap="UserMap">
+		SELECT
+			id,
+			name,
+			birthdate,
+			deleted,
+			created_at,
+			created_by,
+			updated_at,
+			updated_by,
+			deleted_at,
+			deleted_by
+		FROM
+		 	users
+		WHERE
+			deleted = 0
+		AND name like '%${name}'
+		<if test="birthdate != null">
+			AND birthdate = #{birthdate}
+		</if>
+		ORDER BY
+			id
+	</select>
+
+	<resultMap id="UserMap" type="com.example.demo.entity.User">
+		<id property="id" column="id"/>
+		<result property="name" column="name"/>
+		<result property="birthdate" column="birthdate"/>
+		<result property="deleted" column="deleted"/>
+		<result property="created_at" column="created_at"/>
+		<result property="created_by" column="created_by"/>
+		<result property="updated_at" column="updated_at"/>
+		<result property="updated_by" column="updated_by"/>
+		<result property="deleted_at" column="deleted_at"/>
+		<result property="deleted_by" column="deleted_by"/>
+	</resultMap>
+
+</mapper>
