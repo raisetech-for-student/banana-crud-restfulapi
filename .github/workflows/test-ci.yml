@@ -1,0 +1,58 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Test CI
+
+on:
+  workflow_dispatch: 
+  push:
+    branches: [ "develop" ]
+  pull_request:
+    branches: [ "develop" ]
+
+permissions:
+  contents: read
+  
+env:
+  SLACK_WEBHOOK: ${{ secrets.SLACK_INCOMING_WEBHOOK_URL }}
+
+jobs:
+  build:
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+      - name: Docker run
+        run:  docker compose up -d
+      - name: Test with Gradle
+        run: ./gradlew test
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v1
+        if: always()
+        with:
+          name: test results
+          path: build/reports/tests/test
+      - name: Slack Notification on Success
+        if: success()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_ICON: https://avatars.githubusercontent.com/t/5814246?s=280&v=4
+          SLACK_TITLE: Test Success
+          SLACK_COLOR: good
+      - name: Slack Notification on Failure
+        if: failure()
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_ICON: https://avatars.githubusercontent.com/t/5814246?s=280&v=4
+          SLACK_TITLE: Test Failure
+          SLACK_COLOR: danger
