@@ -13,9 +13,6 @@ on:
     branches: [ "develop" ]
   pull_request:
     branches: [ "develop" ]
-
-permissions:
-  contents: read
   
 env:
   SLACK_WEBHOOK: ${{ secrets.SLACK_INCOMING_WEBHOOK_URL }}
