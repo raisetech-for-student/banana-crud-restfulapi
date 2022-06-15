@@ -8,7 +8,7 @@ Spring Boot 2.6.3
 ## DockerでのMySQL起動方法
 
 ### 起動手順
-`ディレクトリ「banana-crud-restfulapi」に移動する`  
+`該当のディレクトリに移動する`
 
 `$ docker-compose up -d`  
 コンテナを構築
