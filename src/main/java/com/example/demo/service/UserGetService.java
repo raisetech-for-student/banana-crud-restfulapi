@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,10 +19,14 @@ public class UserGetService {
 		this.mapper = userMapper;
 	}
 
-	public List<UserForm> searchByNameBirthdate(String name, String birthdate){
+	public List<UserForm> searchByNameBirthdate(String name, LocalDate birthdate){
 		List<User> userList = mapper.searchByNameBirthdate(name, birthdate);
 		return toUserForm(userList);
 	}
+//	public List<UserForm> searchByNameBirthdate(String name, LocalDate birthdate){
+//		List<User> userList = mapper.searchByNameBirthdate(name, birthdate);
+//		return toUserForm(userList);
+//	}
 
 	// UserクラスをUserFormクラスに変換
 	public List<UserForm> toUserForm(List<User> userList){

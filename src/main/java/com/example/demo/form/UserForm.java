@@ -2,10 +2,15 @@ package com.example.demo.form;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+
 public class UserForm {
 
 	private String id;
 	private String name;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthdate;
 
 	public UserForm(String id, String name, LocalDate birthdate) {
@@ -22,15 +27,28 @@ public class UserForm {
 	public UserForm() {}
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public LocalDate getBirthdate() {
-		return birthdate;
+		return this.birthdate;
 	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setBirthdate(LocalDate birthdate) {
+		this.birthdate = birthdate;
+	}
+
 
 }

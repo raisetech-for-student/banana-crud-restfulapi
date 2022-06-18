@@ -1,5 +1,6 @@
 package com.example.demo.mapper;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -12,6 +13,6 @@ public interface UserMapper {
 
 	// 名前と生年月日で検索
 	public List<User> searchByNameBirthdate(
-			@Param("name") String name, 
-			@Param("birthdate") String birthdate);
+			@Param("name") String name,
+			@Param("birthdate") LocalDate birthdate);
 }
