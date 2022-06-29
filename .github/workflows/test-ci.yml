@@ -10,9 +10,9 @@ name: Test CI
 on:
   workflow_dispatch: 
   push:
-    branches: [ "develop" ]
+    branches: [ develop ]
   pull_request:
-    branches: [ "develop" ]
+    branches: [ develop ]
   
 env:
   SLACK_WEBHOOK: ${{ secrets.SLACK_INCOMING_WEBHOOK_URL }}
