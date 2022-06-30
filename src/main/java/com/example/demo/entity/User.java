@@ -3,17 +3,40 @@ package com.example.demo.entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * DBから抽出したデータを可能するEntityクラス
+ *
+ */
 public class User {
 
+	/* 一意のid */
 	private String id;
+
+	/* 名前 */
 	private String name;
+
+	/* 生年月日 */
 	private LocalDate birthdate;
+
+	/* 削除フラグ */
 	private int deleted;
+
+	/* 作成日時 */
 	private LocalDateTime created_at;
+
+	/* 作成者 */
 	private String created_by;
+
+	/* 更新日時 */
 	private LocalDateTime updated_at;
+
+	/* 更新者 */
 	private String updated_by;
+
+	/* 削除日時 */
 	private LocalDateTime deleted_at;
+
+	/* 削除者 */
 	private String deleted_by;
 
 	public User() {}
@@ -57,6 +80,5 @@ public class User {
 	public String getDeleted_by() {
 		return deleted_by;
 	}
-
 
 }

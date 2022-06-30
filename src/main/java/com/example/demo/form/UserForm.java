@@ -2,15 +2,19 @@ package com.example.demo.form;
 
 import java.time.LocalDate;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-
+/**
+ * Userクラスから、名前と生年月日を使用者に渡すためのクラス
+ *
+ */
 public class UserForm {
 
+	/* 一意のid */
 	private String id;
+
+	/* 名前 */
 	private String name;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	/* 生年月日 */
 	private LocalDate birthdate;
 
 	public UserForm(String id, String name, LocalDate birthdate) {
@@ -49,6 +53,5 @@ public class UserForm {
 	public void setBirthdate(LocalDate birthdate) {
 		this.birthdate = birthdate;
 	}
-
 
 }
