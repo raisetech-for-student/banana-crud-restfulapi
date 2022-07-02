@@ -52,7 +52,7 @@ jobs:
           --arg commit '<${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} | ${{ github.sha }}>' '{
             attachments: [
               {
-                pretext: ":github: Test ${{ job.status }} :banana:",
+                pretext: "${{ secrets.BANANA_TEAM_ID }} \n :github: Test ${{ job.status }} :banana:",
                 color: $color,
                 fields: [
                   {
