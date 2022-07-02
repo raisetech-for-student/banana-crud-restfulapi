@@ -14,9 +14,6 @@ on:
   pull_request:
     branches: [ develop ]
   
-env:
-  SLACK_WEBHOOK: ${{ secrets.SLACK_INCOMING_WEBHOOK_URL }}
-
 jobs:
   build:
     
@@ -29,8 +26,9 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
+          cache: 'gradle'
       - name: Docker run
-        run:  docker compose up -d
+        run: docker compose up -d
       - name: Test with Gradle
         run: ./gradlew test
       - name: Publish Test Report
