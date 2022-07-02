@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
- * DBから抽出したデータを可能するEntityクラス
+ * DBから抽出したデータを格納するEntityクラス
  *
  */
 public class User {
