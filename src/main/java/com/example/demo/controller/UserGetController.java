@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -47,10 +48,10 @@ public class UserGetController {
 			@RequestParam(name = "birthdate", required = false) String birthdate) {
 
 		// String型からLoalDate型に変換
-		LocalDate bd = toLocalDate(birthdate);
+		Optional<LocalDate> bd = toLocalDate(birthdate);
 
 		// Userデータを取得
-		List<User> userList = service.searchByNameBirthdate(name, bd);
+		List<User> userList = service.searchByNameBirthdate(name, bd.orElse(null));
 
 		// UserForm型に変換
 		List<UserForm> formList = toUserForm(userList);
@@ -63,9 +64,9 @@ public class UserGetController {
 	 * String型の生年月日をLocalDate型へ変換する。
 	 *
 	 * @param birthdate 生年月日
-	 * @return returnBirthdate 生年月日
+	 * @return Optional.ofNullable(returnBirthdate) 生年月日
 	 */
-	private LocalDate toLocalDate(String stringBirthdate) {
+	private Optional<LocalDate> toLocalDate(String stringBirthdate) {
 
 		// 文字列のフォーマットを初期化
 		String format = null;
@@ -95,7 +96,8 @@ public class UserGetController {
 
 		}
 
-		return returnBirthdate;
+		// ラップした後、生年月日を返す
+		return Optional.ofNullable(returnBirthdate);
 	}
 
 	/**
