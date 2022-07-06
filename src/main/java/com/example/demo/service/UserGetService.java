@@ -32,9 +32,7 @@ public class UserGetService {
 	public List<User> searchByNameBirthdate(String name, LocalDate birthdate){
 
 		// Userデータを取得
-		List<User> userList = mapper.searchByNameBirthdate(name, birthdate);
-
-		return userList;
+		return mapper.searchByNameBirthdate(name, birthdate);
 	}
 
 }

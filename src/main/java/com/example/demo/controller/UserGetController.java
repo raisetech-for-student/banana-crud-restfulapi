@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.constant.LocalDateConstant;
 import com.example.demo.entity.User;
-import com.example.demo.form.UserForm;
+import com.example.demo.response.UserResponse;
 import com.example.demo.service.UserGetService;
 
 /**
@@ -43,7 +43,7 @@ public class UserGetController {
 	 * @return 抽出したユーザリスト
 	 */
 	@GetMapping("/users")
-	public ResponseEntity<List<UserForm>> searchByNameBirthdate(
+	public ResponseEntity<List<UserResponse>> searchByNameBirthdate(
 			@Valid @NotBlank @RequestParam(name = "name") String name,
 			@RequestParam(name = "birthdate", required = false) String birthdate) {
 
@@ -53,10 +53,10 @@ public class UserGetController {
 		// Userデータを取得
 		List<User> userList = service.searchByNameBirthdate(name, bd.orElse(null));
 
-		// UserForm型に変換
-		List<UserForm> formList = toUserForm(userList);
+		// UserResponse型に変換
+		List<UserResponse> responseList = toUserForm(userList);
 
-		return ResponseEntity.ok(formList);
+		return ResponseEntity.ok(responseList);
 	}
 
 	/**
@@ -101,22 +101,22 @@ public class UserGetController {
 	}
 
 	/**
-	 * UserForm型への変換 <br>
-	 * 抽出したユーザ全件数、User型からUserForm型に変換する。
+	 * UserResponse型への変換 <br>
+	 * 抽出したユーザ全件数、User型からUserResponse型に変換する。
 	 *
 	 * @param userList ユーザリスト
-	 * @return userFormList ユーザフォームリスト
+	 * @return userResponseList ユーザフォームリスト
 	 */
-	private List<UserForm> toUserForm(List<User> userList){
-		// 変換後のuserFormを追加するための配列を初期化
-		ArrayList<UserForm> userFormList = new ArrayList<UserForm>();
+	private List<UserResponse> toUserForm(List<User> userList){
+		// 変換後のuserResponseを追加するための配列を初期化
+		ArrayList<UserResponse> userResponseList = new ArrayList<UserResponse>();
 
 		// 抽出したユーザ全件数を変換
 		for (User user : userList) {
-			userFormList.add(new UserForm(user.getId(), user.getName(), user.getBirthdate()));
+			userResponseList.add(new UserResponse(user.getId(), user.getName(), user.getBirthdate()));
 		}
 
-		return userFormList;
+		return userResponseList;
 	}
 
 }

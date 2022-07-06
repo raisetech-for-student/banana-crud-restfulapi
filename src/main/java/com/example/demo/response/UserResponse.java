@@ -1,4 +1,4 @@
-package com.example.demo.form;
+package com.example.demo.response;
 
 import java.time.LocalDate;
 
@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * Userクラスから、名前と生年月日を使用者に渡すためのクラス
  *
  */
-public class UserForm {
+public class UserResponse {
 
 	/* 一意のid */
 	private String id;
@@ -17,18 +17,18 @@ public class UserForm {
 	/* 生年月日 */
 	private LocalDate birthdate;
 
-	public UserForm(String id, String name, LocalDate birthdate) {
+	public UserResponse(String id, String name, LocalDate birthdate) {
 		this.id = id;
 		this.name = name;
 		this.birthdate = birthdate;
 	}
 
-	public UserForm(String name, LocalDate birthdate) {
+	public UserResponse(String name, LocalDate birthdate) {
 		this.name = name;
 		this.birthdate = birthdate;
 	}
 
-	public UserForm() {}
+	public UserResponse() {}
 
 	public String getId() {
 		return this.id;

@@ -22,22 +22,22 @@ public class User {
 	private int deleted;
 
 	/* 作成日時 */
-	private LocalDateTime created_at;
+	private LocalDateTime createdAt;
 
 	/* 作成者 */
-	private String created_by;
+	private String createdBy;
 
 	/* 更新日時 */
-	private LocalDateTime updated_at;
+	private LocalDateTime updatedAt;
 
 	/* 更新者 */
-	private String updated_by;
+	private String updatedBy;
 
 	/* 削除日時 */
-	private LocalDateTime deleted_at;
+	private LocalDateTime deletedAt;
 
 	/* 削除者 */
-	private String deleted_by;
+	private String deletedBy;
 
 	public User() {}
 
@@ -57,28 +57,28 @@ public class User {
 		return deleted;
 	}
 
-	public LocalDateTime getCreated_at() {
-		return created_at;
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
 	}
 
-	public String getCreated_by() {
-		return created_by;
+	public String getCreatedBy() {
+		return createdBy;
 	}
 
-	public LocalDateTime getUpdated_at() {
-		return updated_at;
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public String getUpdated_by() {
-		return updated_by;
+	public String getUpdatedBy() {
+		return updatedBy;
 	}
 
-	public LocalDateTime getDeleted_at() {
-		return deleted_at;
+	public LocalDateTime getDeletedAt() {
+		return deletedAt;
 	}
 
-	public String getDeleted_by() {
-		return deleted_by;
+	public String getDeletedBy() {
+		return deletedBy;
 	}
 
 }
