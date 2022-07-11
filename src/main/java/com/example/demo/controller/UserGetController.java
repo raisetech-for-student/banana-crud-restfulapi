@@ -2,9 +2,9 @@ package com.example.demo.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -47,14 +47,14 @@ public class UserGetController {
 			@Valid @NotBlank @RequestParam(name = "name") String name,
 			@RequestParam(name = "birthdate", required = false) String birthdate) {
 
-		// String型からLoalDate型に変換
+		// String型からLocalDate型に変換
 		Optional<LocalDate> bd = toLocalDate(birthdate);
 
 		// Userデータを取得
 		List<User> userList = service.searchByNameBirthdate(name, bd.orElse(null));
 
 		// UserResponse型に変換
-		List<UserResponse> responseList = toUserForm(userList);
+		List<UserResponse> responseList = toUserResponse(userList);
 
 		return ResponseEntity.ok(responseList);
 	}
@@ -107,14 +107,13 @@ public class UserGetController {
 	 * @param userList ユーザリスト
 	 * @return userResponseList ユーザフォームリスト
 	 */
-	private List<UserResponse> toUserForm(List<User> userList){
-		// 変換後のuserResponseを追加するための配列を初期化
-		ArrayList<UserResponse> userResponseList = new ArrayList<UserResponse>();
+	private List<UserResponse> toUserResponse(List<User> userList){
 
-		// 抽出したユーザ全件数を変換
-		for (User user : userList) {
-			userResponseList.add(new UserResponse(user.getId(), user.getName(), user.getBirthdate()));
-		}
+		List<UserResponse> userResponseList = userList.stream()
+							// UserクラスからUserResponseクラスに変換 ユーザ件数分行う
+							.map(user -> new UserResponse(user.getId(), user.getName(), user.getBirthdate()))
+							// StreamをListに変換
+							.collect(Collectors.toList());
 
 		return userResponseList;
 	}
