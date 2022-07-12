@@ -93,7 +93,6 @@ public class UserGetController {
 
 		}
 
-		// ラップした後、生年月日を返す
 		return Optional.ofNullable(returnBirthdate);
 	}
 
