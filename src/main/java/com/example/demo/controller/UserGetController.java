@@ -66,7 +66,7 @@ public class UserGetController {
 	 * @param birthdate 生年月日
 	 * @return Optional.ofNullable(returnBirthdate) 生年月日
 	 */
-	private Optional<LocalDate> toLocalDate(String stringBirthdate) {
+	private Optional<LocalDate> toLocalDate(String birthdate) {
 
 		// 文字列のフォーマットを初期化
 		String format = null;
@@ -75,9 +75,9 @@ public class UserGetController {
 		LocalDate returnBirthdate = null;
 
 		// 生年月日のフォーマットを判別し、セットする
-		if (stringBirthdate.contains("/")) {
+		if (birthdate.contains("/")) {
 			format = LocalDateConstant.FORMAT_SLASH;
-		} else if (stringBirthdate.contains("-")) {
+		} else if (birthdate.contains("-")) {
 			format = LocalDateConstant.FORMAT_HYPHEN;
 		} else {
 			format = LocalDateConstant.FORMAT_NUM;
@@ -88,7 +88,7 @@ public class UserGetController {
 			DateTimeFormatter Formatter = DateTimeFormatter.ofPattern(format);
 
 			// String型からLoalDate型に変換
-			returnBirthdate = LocalDate.parse(stringBirthdate, Formatter);
+			returnBirthdate = LocalDate.parse(birthdate, Formatter);
 
 		} catch (Exception e) {
 			// 不正なフォーマットや日付である場合、nullを返す
