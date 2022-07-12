@@ -84,11 +84,8 @@ public class UserGetController {
 		}
 
 		try {
-			// 引数の生年月日のフォーマットを設定
-			DateTimeFormatter Formatter = DateTimeFormatter.ofPattern(format);
-
-			// String型からLoalDate型に変換
-			returnBirthdate = LocalDate.parse(birthdate, Formatter);
+			// 引数の生年月日のフォーマットを設定し、String型からLoalDate型に変換
+			returnBirthdate = LocalDate.parse(birthdate, DateTimeFormatter.ofPattern(format));
 
 		} catch (Exception e) {
 			// 不正なフォーマットや日付である場合、nullを返す
