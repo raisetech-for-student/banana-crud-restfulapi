@@ -23,11 +23,6 @@ public class UserResponse {
 		this.birthdate = birthdate;
 	}
 
-	public UserResponse(String name, LocalDate birthdate) {
-		this.name = name;
-		this.birthdate = birthdate;
-	}
-
 	public UserResponse() {}
 
 	public String getId() {
