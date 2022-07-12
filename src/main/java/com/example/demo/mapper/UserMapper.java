@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import com.example.demo.entity.User;
 
 /**
- * GetHttpを処理するMapperインターフェイス
+ * ユーザ検索処理を行うMapperインターフェイス
  *
  */
 @Mapper
