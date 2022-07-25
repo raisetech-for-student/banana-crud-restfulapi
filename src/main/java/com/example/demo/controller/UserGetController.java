@@ -106,9 +106,7 @@ public class UserGetController {
 	private List<UserResponse> toUserResponse(List<User> userList){
 
 		return userList.stream()
-						// UserクラスからUserResponseクラスに変換 ユーザ件数分行う
 						.map(user -> new UserResponse(user.getId(), user.getName(), user.getBirthdate()))
-						// StreamをListに変換
 						.collect(Collectors.toList());
 	}
 
