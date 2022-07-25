@@ -88,7 +88,7 @@ public class UserGetController {
 			returnBirthdate = LocalDate.parse(birthdate, DateTimeFormatter.ofPattern(format));
 
 		} catch (Exception e) {
-			// 不正なフォーマットや日付である場合、nullを返す
+			// フォーマットできない日付である場合、nullを返す
 			returnBirthdate = null;
 
 		}
