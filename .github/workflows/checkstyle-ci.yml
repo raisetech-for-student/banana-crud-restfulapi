@@ -21,3 +21,9 @@ jobs:
                 cache: 'gradle'
             - name: Checkstyle with Gradle
               run: ./gradlew check
+            - name: Upload Report
+              uses: actions/upload-artifact@v1
+              if: always()
+              with:
+                name: test results
+                path: build/reports/checkstyle/
