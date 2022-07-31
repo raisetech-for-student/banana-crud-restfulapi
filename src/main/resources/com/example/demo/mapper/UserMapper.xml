@@ -21,7 +21,7 @@
 		 	users
 		WHERE
 			deleted = 0
-		AND name like '#{name}%'
+		AND name like CONCAT(#{name}, '%')
 		<if test="birthdate != null">
 			AND birthdate = #{birthdate}
 		</if>
