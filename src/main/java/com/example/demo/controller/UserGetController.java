@@ -106,8 +106,8 @@ public class UserGetController {
 	private List<UserResponse> toUserResponse(List<User> userList){
 
 		return userList.stream()
-						.map(user -> new UserResponse(user.getId(), user.getName(), user.getBirthdate()))
-						.collect(Collectors.toList());
+					.map(user -> new UserResponse(user.getId(), user.getName(), user.getBirthdate()))
+					.collect(Collectors.toList());
 	}
 
 }
