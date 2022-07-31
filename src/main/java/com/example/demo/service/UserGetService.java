@@ -9,7 +9,7 @@ import com.example.demo.entity.User;
 import com.example.demo.mapper.UserMapper;
 
 /**
- * GetHttpを処理するServiceクラス
+ * ユーザ検索処理を行うServiceクラス
  *
  */
 @Service
