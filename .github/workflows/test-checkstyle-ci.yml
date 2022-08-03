@@ -5,15 +5,15 @@
 # This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: Test CI
+name: Test & Checkstyle CI
 
 on:
-  workflow_dispatch: 
+  workflow_dispatch:
   push:
     branches: [ develop ]
   pull_request:
     branches: [ develop ]
-  
+
 jobs:
   build:
     
@@ -36,6 +36,15 @@ jobs:
         if: always() # always run even if the previous step fails
         with:
           report_paths: '**/build/test-results/test/TEST-*.xml'
+      - name: Run check style
+          uses: nikitasavinov/checkstyle-action@master
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            checkstyle_config: 'config/checkstyle/checkstyle.xml'
+            level: 'error'
+            reporter: 'github-pr-check'
+            workdir: 'src/main'
+            tool_name: 'Checkstyle'
       - name: Slack Notification
         if: always()
         run: |
@@ -44,7 +53,7 @@ jobs:
           else
             COLOR="danger"
           fi
-  
+        
           jq -n --arg color "${COLOR}" \
           --arg jobLink '<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }}>' \
           --arg commit '<${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} | ${{ github.sha }}>' '{
