@@ -6,6 +6,7 @@ import com.example.demo.response.UserResponse;
 import com.example.demo.service.UserGetService;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -100,7 +101,7 @@ public class UserGetController {
    */
   private List<UserResponse> toUserResponse(List<User> userList) {
 
-    return userList.stream()
+    return Collections.unmodifiableList(userList).stream()
         .map(user -> new UserResponse(user.getId(), user.getName(), user.getBirthdate()))
         .collect(Collectors.toList());
   }
