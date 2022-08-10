@@ -21,7 +21,7 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
       - name: Run SpotBugs
-        run: ./gradlew spotbugsMain
+        run: ./gradlew check
       - name: Upload SpotBugs Report
         uses: actions/upload-artifact@v1
         if: always()
