@@ -23,6 +23,7 @@ class UserDeleteServiceTest {
   @Test
   @DisplayName("引数に設定したIDと削除日、削除者をもとに正常に論理削除処理が実行されること")
   void deleteByIdTest() {
+    doReturn(Optional.of(1)).when(userMapper).searchDeletedById("11110111101111011110111100");
     userDeleteService.deleteById("11110111101111011110111100", "2022-01-04 12:30:30", "API");
     verify(userMapper, times(1)).deleteById(
         "11110111101111011110111100", "2022-01-04 12:30:30", "API"
