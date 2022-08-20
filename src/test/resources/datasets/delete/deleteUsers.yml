@@ -1,0 +1,41 @@
+users:
+  - id: "11110111101111011110111100"
+    name: "AA"
+    birthdate: "2022-01-01"
+    deleted: 1
+    created_at: "2022-01-02 12:30:30"
+    created_by: "API"
+    updated_at: "2022-01-02 12:30:30"
+    updated_by: "API"
+    deleted_at: "2022-01-04 12:30:30"
+    deleted_by: "API"
+  - id: "22220222202222022220222200"
+    name: "BA"
+    birthdate: "2022-02-02"
+    deleted: 0
+    created_at: "2022-02-02 12:30:30"
+    created_by: "API"
+    updated_at: "2022-02-02 12:30:30"
+    updated_by: "API"
+    deleted_at: NULL
+    deleted_by: NUll
+  - id: "33330333303333033330333300"
+    name: "C"
+    birthdate: "2022-01-01"
+    deleted: 0
+    created_at: "2022-01-02 12:30:30"
+    created_by: "API"
+    updated_at: "2022-01-03 12:30:30"
+    updated_by: "API"
+    deleted_at: NULL
+    deleted_by: NUll
+  - id: "44440444404444044440444400"
+    name: "DD"
+    birthdate: "2022-01-01"
+    deleted: 1
+    created_at: "2022-01-02 12:30:30"
+    created_by: "API"
+    updated_at: "2022-01-03 12:30:30"
+    updated_by: "API"
+    deleted_at: "2022-01-04 12:30:30"
+    deleted_by: "API"
