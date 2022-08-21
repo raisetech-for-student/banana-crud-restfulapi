@@ -43,7 +43,7 @@ public interface UserMapper {
       @Param("deletedBy") String deletedBy
   );
 
-  public Optional<Integer> searchDeletedById(
+  public Optional<User> searchDeletedById(
       @Param("id") String id
   );
 }

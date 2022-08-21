@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.entity.User;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.mapper.UserMapper;
 import java.util.Optional;
@@ -17,8 +18,8 @@ public class UserDeleteService {
   }
 
   public void deleteById(String id, String deletedAt, String deletedBy) {
-    Optional<Integer> deleted = mapper.searchDeletedById(id);
-    if (deleted.isPresent()) {
+    Optional<User> deleted = mapper.searchDeletedById(id);
+    if (deleted.isPresent() && deleted.get().getDeleted() == 0) {
       mapper.deleteById(id, deletedAt, deletedBy);
     } else {
       throw new ResourceNotFoundException("resource not found");
