@@ -38,8 +38,18 @@ public class User {
   /* 削除者 */
   private String deletedBy;
 
-  public User(String id, String name, LocalDate birthdate, int deleted, LocalDateTime createdAt, String createdBy,
-              LocalDateTime updatedAt, String updatedBy, LocalDateTime deletedAt, String deletedBy) {
+  public User(
+      String id,
+      String name,
+      LocalDate birthdate,
+      int deleted,
+      LocalDateTime createdAt,
+      String createdBy,
+      LocalDateTime updatedAt,
+      String updatedBy,
+      LocalDateTime deletedAt,
+      String deletedBy
+  ) {
     this.id = id;
     this.name = name;
     this.birthdate = birthdate;
@@ -97,19 +107,28 @@ public class User {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     User user = (User) o;
-    return getDeleted() == user.getDeleted() && Objects.equals(getId(), user.getId())
-        && Objects.equals(getName(), user.getName()) && Objects.equals(getBirthdate(), user.getBirthdate())
-        && Objects.equals(getCreatedAt(), user.getCreatedAt()) && Objects.equals(getCreatedBy(), user.getCreatedBy())
-        && Objects.equals(getUpdatedAt(), user.getUpdatedAt()) && Objects.equals(getUpdatedBy(), user.getUpdatedBy())
-        && Objects.equals(getDeletedAt(), user.getDeletedAt()) && Objects.equals(getDeletedBy(), user.getDeletedBy());
+    return getDeleted() == user.getDeleted()
+        && Objects.equals(getId(), user.getId())
+        && Objects.equals(getName(), user.getName())
+        && Objects.equals(getBirthdate(), user.getBirthdate())
+        && Objects.equals(getCreatedAt(), user.getCreatedAt())
+        && Objects.equals(getCreatedBy(), user.getCreatedBy())
+        && Objects.equals(getUpdatedAt(), user.getUpdatedAt())
+        && Objects.equals(getUpdatedBy(), user.getUpdatedBy())
+        && Objects.equals(getDeletedAt(), user.getDeletedAt())
+        && Objects.equals(getDeletedBy(), user.getDeletedBy());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getId(), getName(), getBirthdate(), getDeleted(), getCreatedAt(), getCreatedBy(),
-        getUpdatedAt(), getUpdatedBy(), getDeletedAt(), getDeletedBy());
+    return Objects.hash(getId(), getName(), getBirthdate(), getDeleted(), getCreatedAt(),
+        getCreatedBy(), getUpdatedAt(), getUpdatedBy(), getDeletedAt(), getDeletedBy());
   }
 }
