@@ -21,7 +21,8 @@ public class UserDeleteService {
   }
 
   public void deleteById(String id, LocalDateTime deletedAt, String deletedBy) {
-    String strDeletedAt = deletedAt.format(DateTimeFormatter.ofPattern(LocalDateConstant.FORMAT_HYPHEN_TIME));
+    String strDeletedAt = deletedAt
+        .format(DateTimeFormatter.ofPattern(LocalDateConstant.FORMAT_HYPHEN_TIME));
     Optional<User> deleted = mapper.searchById(id);
     if (deleted.isPresent() && deleted.get().getDeleted() == 0) {
       mapper.deleteById(id, strDeletedAt, deletedBy);
