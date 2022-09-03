@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * DBから抽出したデータを格納するEntityクラス
@@ -97,12 +98,12 @@ public class User {
     return updatedBy;
   }
 
-  public LocalDateTime getDeletedAt() {
-    return deletedAt;
+  public Optional<LocalDateTime> getDeletedAt() {
+    return Optional.ofNullable(deletedAt);
   }
 
-  public String getDeletedBy() {
-    return deletedBy;
+  public Optional<String> getDeletedBy() {
+    return Optional.ofNullable(deletedBy);
   }
 
   @Override
