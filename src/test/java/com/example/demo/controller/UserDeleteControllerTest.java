@@ -16,7 +16,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -32,7 +32,7 @@ class UserDeleteControllerTest {
   @Test
   @DisplayName("指定したIDが存在する時")
   void deleteByIdTest() throws Exception {
-    mockMvc.perform(patch("/users/11110111101111011110111100"))
+    mockMvc.perform(delete("/users/11110111101111011110111100"))
         .andExpect(status().isOk())
         .andExpect(content().string("user successfully deleted"));
   }
@@ -42,7 +42,7 @@ class UserDeleteControllerTest {
   void deleteByIdNotFoundTest() throws Exception {
     doThrow(new ResourceNotFoundException("resource not found")).when(userDeleteService)
         .deleteById(anyString(), any(), anyString());
-    String response = mockMvc.perform(patch("/users/1"))
+    String response = mockMvc.perform(delete("/users/1"))
         .andExpect(status().isNotFound())
         .andReturn().getResponse().getContentAsString();
     ObjectMapper mapper = new ObjectMapper();
