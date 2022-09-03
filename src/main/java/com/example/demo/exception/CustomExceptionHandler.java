@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class CustumExceptionHundler {
+public class CustomExceptionHandler {
   @ExceptionHandler(value = ResourceNotFoundException.class)
   public ResponseEntity<Map<String, String>> handleNoResourceFound(
       ResourceNotFoundException e, HttpServletRequest request) {

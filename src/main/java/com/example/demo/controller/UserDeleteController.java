@@ -25,7 +25,7 @@ public class UserDeleteController {
   /**
    * GUIDによる論理削除処理 <br>
    *
-   * @param id GUID
+   * @param id ULID
    */
 
   @PatchMapping(path = "{id}")

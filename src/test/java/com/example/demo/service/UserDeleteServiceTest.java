@@ -4,7 +4,6 @@ import com.example.demo.entity.User;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.mapper.UserMapper;
 import java.util.Optional;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,10 +38,6 @@ class UserDeleteServiceTest {
     assertThrows(ResourceNotFoundException.class, () -> userDeleteService.deleteById(
         "1", "2022-01-04 12:30:30", "API")
     );
-    assertThatThrownBy(() -> {
-      throw new ResourceNotFoundException("resource not found");
-    })
-        .hasMessage("resource not found");
   }
 
   @Test
@@ -53,9 +48,5 @@ class UserDeleteServiceTest {
     assertThrows(ResourceNotFoundException.class, () -> userDeleteService.deleteById(
         "11110111101111011110111100", "2022-01-04 12:30:30", "API")
     );
-    assertThatThrownBy(() -> {
-      throw new ResourceNotFoundException("resource not found");
-    })
-        .hasMessage("resource not found");
   }
 }

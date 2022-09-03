@@ -28,12 +28,10 @@ public interface UserMapper {
   );
 
   /**
-   * 名前と生年月日による検索処理 <br>
-   * 名前と生年月日を用いて、該当するユーザを検索する。
-   * 名前：前方一致
-   * 生年月日：完全一致
+   * 論理削除処理 <br>
+   * ULIDを用いて、該当するユーザを論理削除する。
    *
-   * @param id        GUID
+   * @param id        ULID
    * @param deletedAt 削除日
    * @param deletedBy 削除者
    */
