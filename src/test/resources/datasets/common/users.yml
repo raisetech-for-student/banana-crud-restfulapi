@@ -7,8 +7,8 @@ users:
     created_by: "API"
     updated_at: "2022-01-02 12:30:30"
     updated_by: "API"
-    deleted_at: NULL
-    deleted_by: NUll
+    deleted_at:
+    deleted_by:
   - id: "22220222202222022220222200"
     name: "BA"
     birthdate: "2022-02-02"
@@ -17,8 +17,8 @@ users:
     created_by: "API"
     updated_at: "2022-02-02 12:30:30"
     updated_by: "API"
-    deleted_at: NULL
-    deleted_by: NUll
+    deleted_at:
+    deleted_by:
   - id: "33330333303333033330333300"
     name: "C"
     birthdate: "2022-01-01"
@@ -27,8 +27,8 @@ users:
     created_by: "API"
     updated_at: "2022-01-03 12:30:30"
     updated_by: "API"
-    deleted_at: NULL
-    deleted_by: NUll
+    deleted_at:
+    deleted_by:
   - id: "44440444404444044440444400"
     name: "DD"
     birthdate: "2022-01-01"

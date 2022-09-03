@@ -28,6 +28,18 @@ public interface UserMapper {
   );
 
   /**
+   * ULIDによる検索処理 <br>
+   * ULIDを用いて、該当するユーザを検索する。
+   *
+   * @param id ULID
+   * @return 抽出したユーザ
+   */
+  public Optional<User> searchById(
+      @Param("id") String id
+  );
+
+
+  /**
    * 論理削除処理 <br>
    * ULIDを用いて、該当するユーザを論理削除する。
    *
@@ -39,9 +51,5 @@ public interface UserMapper {
       @Param("id") String id,
       @Param("deletedAt") String deletedAt,
       @Param("deletedBy") String deletedBy
-  );
-
-  public Optional<User> searchDeletedById(
-      @Param("id") String id
   );
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doThrow;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +31,17 @@ class UserDeleteControllerTest {
 
   @Test
   @DisplayName("指定したIDが存在する時")
-  void deleteByidPositiveTest() throws Exception {
+  void deleteByIdTest() throws Exception {
     mockMvc.perform(patch("/users/11110111101111011110111100"))
         .andExpect(status().isOk())
         .andExpect(content().string("user successfully deleted"));
   }
 
   @Test
-  void deleteByidNegativeTest() throws Exception {
+  @DisplayName("指定したIDが存在しない時")
+  void deleteByIdNotFoundTest() throws Exception {
     doThrow(new ResourceNotFoundException("resource not found")).when(userDeleteService)
-        .deleteById(anyString(), anyString(), anyString());
+        .deleteById(anyString(), any(), anyString());
     String response = mockMvc.perform(patch("/users/1"))
         .andExpect(status().isNotFound())
         .andReturn().getResponse().getContentAsString();

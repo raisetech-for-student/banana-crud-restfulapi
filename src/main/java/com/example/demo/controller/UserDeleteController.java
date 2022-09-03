@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.constant.LocalDateConstant;
 import com.example.demo.service.UserDeleteService;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,8 +28,7 @@ public class UserDeleteController {
 
   @PatchMapping(path = "{id}")
   public ResponseEntity<String> deleteUser(@PathVariable("id") String id) {
-    String deletedAt = LocalDateTime.now().format(DateTimeFormatter
-        .ofPattern(LocalDateConstant.FORMAT_HYPHEN_TIME));
+    LocalDateTime deletedAt = LocalDateTime.now();
     String deletedBy = "API";
     service.deleteById(id, deletedAt, deletedBy);
     return ResponseEntity.ok().body("user successfully deleted");

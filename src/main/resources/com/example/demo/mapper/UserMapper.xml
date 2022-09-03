@@ -6,8 +6,7 @@
 <mapper namespace="com.example.demo.mapper.UserMapper">
 
     <select id="searchByNameBirthdate" resultMap="UserMap">
-        SELECT
-        id,
+        SELECT id,
         name,
         birthdate,
         deleted,
@@ -17,10 +16,8 @@
         updated_by,
         deleted_at,
         deleted_by
-        FROM
-        users
-        WHERE
-        deleted = 0
+        FROM users
+        WHERE deleted = 0
         AND name like CONCAT(#{name}, '%')
         <if test="birthdate != null">
             AND birthdate = #{birthdate}
@@ -28,15 +25,23 @@
         ORDER BY id
     </select>
 
-    <select id="searchDeletedById" resultMap="UserMap">
-        SELECT deleted
+    <select id="searchById" resultMap="UserMap">
+        SELECT id,
+               name,
+               birthdate,
+               deleted,
+               created_at,
+               created_by,
+               updated_at,
+               updated_by,
+               deleted_at,
+               deleted_by
         FROM users
         WHERE id = #{id}
     </select>
 
     <update id="deleteById">
-        UPDATE
-            users
+        UPDATE users
         SET deleted    = 1,
             deleted_at = #{deletedAt},
             deleted_by = #{deletedBy}
