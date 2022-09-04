@@ -5,7 +5,8 @@ import com.example.demo.service.UserDeleteService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Map;
-import static org.assertj.core.api.Assertions.assertThat;
+import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
+import static net.javacrumbs.jsonunit.spring.JsonUnitResultMatchers.json;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
@@ -17,8 +18,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -34,7 +35,7 @@ class UserDeleteControllerTest {
   void deleteByIdTest() throws Exception {
     mockMvc.perform(delete("/users/11110111101111011110111100"))
         .andExpect(status().isOk())
-        .andExpect(content().string("user successfully deleted"));
+        .andExpect(json().isEqualTo("{\"message\": \"user successfully deleted\"}"));
   }
 
   @Test
@@ -48,6 +49,14 @@ class UserDeleteControllerTest {
     ObjectMapper mapper = new ObjectMapper();
     Map responseMessage = mapper.readValue(response, new TypeReference<Map<String, String>>() {
     });
-    assertThat(responseMessage.get("message")).isEqualTo("resource not found");
+    assertThatJson(response).isEqualTo(
+        "{" +
+            "\"error\":\"Not Found\"," +
+            "\"message\":\"resource not found\"," +
+            "\"path\":\"/users/1\"," +
+            "\"status\":\"404\"," +
+            "\"timestamp\":\"" + responseMessage.get("timestamp") + "\"" +
+            "}"
+    );
   }
 }

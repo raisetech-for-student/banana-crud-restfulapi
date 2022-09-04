@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.service.UserDeleteService;
 import java.time.LocalDateTime;
+import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,10 +28,10 @@ public class UserDeleteController {
    */
 
   @DeleteMapping(path = "{id}")
-  public ResponseEntity<String> deleteUser(@PathVariable("id") String id) {
+  public ResponseEntity<Map<String, String>> deleteUser(@PathVariable("id") String id) {
     LocalDateTime deletedAt = LocalDateTime.now();
     String deletedBy = "API";
     service.deleteById(id, deletedAt, deletedBy);
-    return ResponseEntity.ok().body("user successfully deleted");
+    return ResponseEntity.ok().body(Map.of("message", "user successfully deleted"));
   }
 }
