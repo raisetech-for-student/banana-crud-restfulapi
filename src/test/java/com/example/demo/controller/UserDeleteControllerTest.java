@@ -2,16 +2,18 @@ package com.example.demo.controller;
 
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.service.UserDeleteService;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.Map;
-import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import static net.javacrumbs.jsonunit.spring.JsonUnitResultMatchers.json;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import org.mockito.MockedStatic;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mockStatic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,24 +41,47 @@ class UserDeleteControllerTest {
   }
 
   @Test
-  @DisplayName("指定したIDが存在しない時")
+  @DisplayName("指定したIDが存在しない時、ZonedDateTimeを使用して検証")
   void deleteByIdNotFoundTest() throws Exception {
-    doThrow(new ResourceNotFoundException("resource not found")).when(userDeleteService)
-        .deleteById(anyString(), any(), anyString());
-    String response = mockMvc.perform(delete("/users/1"))
-        .andExpect(status().isNotFound())
-        .andReturn().getResponse().getContentAsString();
-    ObjectMapper mapper = new ObjectMapper();
-    Map responseMessage = mapper.readValue(response, new TypeReference<Map<String, String>>() {
-    });
-    assertThatJson(response).isEqualTo(
-        "{" +
-            "\"error\":\"Not Found\"," +
-            "\"message\":\"resource not found\"," +
-            "\"path\":\"/users/1\"," +
-            "\"status\":\"404\"," +
-            "\"timestamp\":\"" + responseMessage.get("timestamp") + "\"" +
-            "}"
-    );
+    ZonedDateTime zonedDateTime = ZonedDateTime.of(2022, 9, 5, 0, 0, 0, 0, ZoneId.of("Asia/Tokyo"));
+    try (MockedStatic<ZonedDateTime> zonedDateTimeMockedStatic = mockStatic(ZonedDateTime.class)) {
+      zonedDateTimeMockedStatic.when(ZonedDateTime::now).thenReturn(zonedDateTime);
+      doThrow(new ResourceNotFoundException("resource not found")).when(userDeleteService)
+          .deleteById(anyString(), any(), anyString());
+      mockMvc.perform(delete("/users/1"))
+          .andExpect(status().isNotFound())
+          .andExpect(json().isEqualTo(
+              "{" +
+                  "\"error\":\"Not Found\"," +
+                  "\"message\":\"resource not found\"," +
+                  "\"path\":\"/users/1\"," +
+                  "\"status\":\"404\"," +
+                  "\"timestamp\":\"2022-09-05T00:00+09:00[Asia/Tokyo]\"" +
+                  "}"
+          ));
+    }
+  }
+
+  @Test
+  @DisplayName("指定したIDが存在しない時、Clockを使用して検証")
+  void deleteByIdNotFoundClockTest() throws Exception {
+    String zonedDateTime = "2022-09-04T15:00:00Z";
+    Clock clock = Clock.fixed(Instant.parse(zonedDateTime), ZoneId.of("Asia/Tokyo"));
+    try (MockedStatic<Clock> zonedDateTimeMockedStatic = mockStatic(Clock.class)) {
+      zonedDateTimeMockedStatic.when(ZonedDateTime::now).thenReturn(clock);
+      doThrow(new ResourceNotFoundException("resource not found")).when(userDeleteService)
+          .deleteById(anyString(), any(), anyString());
+      mockMvc.perform(delete("/users/1"))
+          .andExpect(status().isNotFound())
+          .andExpect(json().isEqualTo(
+              "{" +
+                  "\"error\":\"Not Found\"," +
+                  "\"message\":\"resource not found\"," +
+                  "\"path\":\"/users/1\"," +
+                  "\"status\":\"404\"," +
+                  "\"timestamp\":\"2022-09-05T00:00+09:00[Asia/Tokyo]\"" +
+                  "}"
+          ));
+    }
   }
 }
