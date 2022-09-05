@@ -12,8 +12,7 @@ import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import org.mockito.MockedStatic;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -35,6 +34,7 @@ class UserDeleteControllerTest {
   @Test
   @DisplayName("ユーザーを論理削除できること")
   void deleteByIdTest() throws Exception {
+    doNothing().when(userDeleteService).deleteById(anyString(), any(), anyString());
     mockMvc.perform(delete("/users/11110111101111011110111100"))
         .andExpect(status().isOk())
         .andExpect(json().isEqualTo("{\"message\": \"user successfully deleted\"}"));
