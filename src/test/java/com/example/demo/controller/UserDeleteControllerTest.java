@@ -33,7 +33,7 @@ class UserDeleteControllerTest {
   MockMvc mockMvc;
 
   @Test
-  @DisplayName("指定したIDが存在する時")
+  @DisplayName("ユーザーを論理削除できること")
   void deleteByIdTest() throws Exception {
     mockMvc.perform(delete("/users/11110111101111011110111100"))
         .andExpect(status().isOk())
@@ -41,7 +41,7 @@ class UserDeleteControllerTest {
   }
 
   @Test
-  @DisplayName("指定したIDが存在しない時、ZonedDateTimeを使用して検証")
+  @DisplayName("存在しないユーザーIDを論理削除しようとした時にNotFoundが返ってくること、ZonedDateTimeを使用して検証")
   void deleteByIdNotFoundTest() throws Exception {
     ZonedDateTime zonedDateTime = ZonedDateTime.of(2022, 9, 5, 0, 0, 0, 0, ZoneId.of("Asia/Tokyo"));
     try (MockedStatic<ZonedDateTime> zonedDateTimeMockedStatic = mockStatic(ZonedDateTime.class)) {
@@ -63,7 +63,7 @@ class UserDeleteControllerTest {
   }
 
   @Test
-  @DisplayName("指定したIDが存在しない時、Clockを使用して検証")
+  @DisplayName("存在しないユーザーIDを論理削除しようとした時にNotFoundが返ってくること、Clockを使用して検証")
   void deleteByIdNotFoundClockTest() throws Exception {
     String zonedDateTime = "2022-09-04T15:00:00Z";
     Clock clock = Clock.fixed(Instant.parse(zonedDateTime), ZoneId.of("Asia/Tokyo"));
