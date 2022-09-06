@@ -46,49 +46,49 @@ jobs:
         with:
           name: test results
           path: build/reports/spotbugs/main.html
-#      - name: Slack Notification
-#        if: always()
-#        run: |
-#          if [[ ${{ job.status }} == "success" ]]; then
-#            COLOR="good"
-#          else
-#            COLOR="danger"
-#          fi
-#
-#          jq -n --arg color "${COLOR}" \
-#          --arg jobLink '<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }}>' \
-#          --arg commit '<${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} | ${{ github.sha }}>' '{
-#            attachments: [
-#              {
-#                pretext: "${{ secrets.BANANA_TEAM_ID }} \n :github: Test ${{ job.status }} :banana:",
-#                color: $color,
-#                fields: [
-#                  {
-#                    title: "Actor",
-#                    value: "'"$GITHUB_ACTOR"'",
-#                    short: true
-#                  },
-#                  {
-#                    title: "Ref",
-#                    value: "'"$GITHUB_REF"'",
-#                    short: true
-#                  },
-#                  {
-#                    title: "Event Name",
-#                    value: "'"$GITHUB_EVENT_NAME"'",
-#                    short: true
-#                  },
-#                  {
-#                    title: "Actions URL",
-#                    value: $jobLink,
-#                    short: true
-#                  },
-#                  {
-#                    title: "Commit",
-#                    value: $commit,
-#                    short: false
-#                  }
-#                ]
-#              }
-#            ]
-#          }' | curl ${{ secrets.SLACK_INCOMING_WEBHOOK_URL }} -X POST -H 'Content-Type: application/json' -d @-
+      - name: Slack Notification
+        if: always()
+        run: |
+          if [[ ${{ job.status }} == "success" ]]; then
+            COLOR="good"
+          else
+            COLOR="danger"
+          fi
+        
+          jq -n --arg color "${COLOR}" \
+          --arg jobLink '<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} | ${{ github.workflow }}>' \
+          --arg commit '<${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }} | ${{ github.sha }}>' '{
+            attachments: [
+              {
+                pretext: "${{ secrets.BANANA_TEAM_ID }} \n :github: Test ${{ job.status }} :banana:",
+                color: $color,
+                fields: [
+                  {
+                    title: "Actor",
+                    value: "'"$GITHUB_ACTOR"'",
+                    short: true
+                  },
+                  {
+                    title: "Ref",
+                    value: "'"$GITHUB_REF"'",
+                    short: true
+                  },
+                  {
+                    title: "Event Name",
+                    value: "'"$GITHUB_EVENT_NAME"'",
+                    short: true
+                  },
+                  {
+                    title: "Actions URL",
+                    value: $jobLink,
+                    short: true
+                  },
+                  {
+                    title: "Commit",
+                    value: $commit,
+                    short: false
+                  }
+                ]
+              }
+            ]
+          }' | curl ${{ secrets.SLACK_INCOMING_WEBHOOK_URL }} -X POST -H 'Content-Type: application/json' -d @-
