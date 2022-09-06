@@ -5,6 +5,8 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.mapper.UserMapper;
 import java.time.LocalDateTime;
 import java.util.Optional;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,6 +41,14 @@ class UserDeleteServiceTest {
     assertThrows(ResourceNotFoundException.class, () -> userDeleteService.deleteById(
         "1", LocalDateTime.of(2022, 01, 04, 12, 30, 30), "API")
     );
+    // assertThatThrownByを使用したテストも追加、やっていることはassertThrowsと同じ
+    assertThatThrownBy(() -> userDeleteService.deleteById(
+        "1", LocalDateTime.of(2022, 01, 04, 12, 30, 30), "API"))
+        .isInstanceOfSatisfying(
+            ResourceNotFoundException.class,
+            e -> {
+              assertThat(e.getMessage()).isEqualTo("resource not found");
+            });
   }
 
   @Test
