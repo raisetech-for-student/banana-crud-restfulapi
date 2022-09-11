@@ -30,7 +30,9 @@ class UserDeleteServiceTest {
         .when(userMapper).searchById("11110111101111011110111100");
     userDeleteService.deleteById("11110111101111011110111100", LocalDateTime.of(2022, 01, 04, 12, 30, 30), "API");
     verify(userMapper, times(1)).deleteById(
-        "11110111101111011110111100", "2022-01-04 12:30:30", "API"
+        "11110111101111011110111100",
+        LocalDateTime.of(2022, 01, 04, 12, 30, 30),
+        "API"
     );
   }
 

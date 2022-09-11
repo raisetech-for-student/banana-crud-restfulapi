@@ -2,6 +2,7 @@ package com.example.demo.mapper;
 
 import com.example.demo.entity.User;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
@@ -49,7 +50,7 @@ public interface UserMapper {
    */
   public void deleteById(
       @Param("id") String id,
-      @Param("deletedAt") String deletedAt,
+      @Param("deletedAt") LocalDateTime deletedAt,
       @Param("deletedBy") String deletedBy
   );
 }
