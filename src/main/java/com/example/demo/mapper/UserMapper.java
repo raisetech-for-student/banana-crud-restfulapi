@@ -2,7 +2,9 @@ package com.example.demo.mapper;
 
 import com.example.demo.entity.User;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -23,5 +25,32 @@ public interface UserMapper {
    */
   public List<User> searchByNameBirthdate(
       @Param("name") String name,
-      @Param("birthdate") LocalDate birthdate);
+      @Param("birthdate") LocalDate birthdate
+  );
+
+  /**
+   * ULIDによる検索処理 <br>
+   * ULIDを用いて、該当するユーザを検索する。
+   *
+   * @param id ULID
+   * @return 抽出したユーザ
+   */
+  public Optional<User> searchById(
+      @Param("id") String id
+  );
+
+
+  /**
+   * 論理削除処理 <br>
+   * ULIDを用いて、該当するユーザを論理削除する。
+   *
+   * @param id        ULID
+   * @param deletedAt 削除日
+   * @param deletedBy 削除者
+   */
+  public void deleteById(
+      @Param("id") String id,
+      @Param("deletedAt") LocalDateTime deletedAt,
+      @Param("deletedBy") String deletedBy
+  );
 }
