@@ -22,7 +22,7 @@ public class UserDeleteController {
   }
 
   /**
-   * GUIDによる論理削除処理 <br>
+   * ULIDによる論理削除処理 <br>
    *
    * @param id ULID
    */

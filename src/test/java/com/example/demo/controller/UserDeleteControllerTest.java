@@ -41,7 +41,7 @@ class UserDeleteControllerTest {
   }
 
   @Test
-  @DisplayName("存在しないユーザーIDを論理削除しようとした時にNotFoundが返ってくること、ZonedDateTimeを使用して検証")
+  @DisplayName("存在しないユーザーIDを論理削除しようとした時にNotFoundが返ってくること、ZonedDateTimeをモック化して検証")
   void deleteByIdNotFoundTest() throws Exception {
     ZonedDateTime zonedDateTime = ZonedDateTime.of(2022, 9, 5, 0, 0, 0, 0, ZoneId.of("Asia/Tokyo"));
     try (MockedStatic<ZonedDateTime> zonedDateTimeMockedStatic = mockStatic(ZonedDateTime.class)) {
@@ -63,7 +63,7 @@ class UserDeleteControllerTest {
   }
 
   @Test
-  @DisplayName("存在しないユーザーIDを論理削除しようとした時にNotFoundが返ってくること、Clockを使用して検証")
+  @DisplayName("存在しないユーザーIDを論理削除しようとした時にNotFoundが返ってくること、ClockをMock化して検証")
   void deleteByIdNotFoundClockTest() throws Exception {
     String zonedDateTime = "2022-09-04T15:00:00Z";
     Clock clock = Clock.fixed(Instant.parse(zonedDateTime), ZoneId.of("Asia/Tokyo"));
